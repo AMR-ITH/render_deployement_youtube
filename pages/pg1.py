@@ -125,8 +125,9 @@ def update_graph(nclicks, ch_id_text, ch_id_text_2, radio_but_1, radio_but_2):
         else:
             object_1 = yd.youtube_creator_dataframe(ch_id_text)
             object_1.save_data_mangodb()
-            dff1 = pd.DataFrame(list(collecting_mangodb(ch_id_text).find()))
-            dff1 = dff1.iloc[:, 2:]
+            dff1=object_1.raw_data_clean_data()
+#             dff1 = pd.DataFrame(list(collecting_mangodb(ch_id_text).find()))
+#             dff1 = dff1.iloc[:, 2:]
             return dff1
 
     def second_collection_db(ch_id_text_2):
@@ -139,8 +140,9 @@ def update_graph(nclicks, ch_id_text, ch_id_text_2, radio_but_1, radio_but_2):
         else:
             object_2 = yd.youtube_creator_dataframe(ch_id_text_2)
             object_2.save_data_mangodb()
-            dff2 = pd.DataFrame(list(collecting_mangodb(ch_id_text_2).find()))
-            dff2 = dff2.iloc[:, 2:]
+            dff2=object_2.raw_data_clean_data()
+#             dff2 = pd.DataFrame(list(collecting_mangodb(ch_id_text_2).find()))
+#             dff2 = dff2.iloc[:, 2:]
             return dff2
 
 
