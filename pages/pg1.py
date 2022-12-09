@@ -114,7 +114,7 @@ def update_graph(nclicks, ch_id_text, ch_id_text_2, radio_but_1, radio_but_2):
         collections_name = db.list_collection_names()[0]
         collection = db[collections_name]
         return collection
-
+    
     def first_collection_db(ch_id_text):
 
         if ch_id_text in client.list_database_names():
@@ -123,9 +123,10 @@ def update_graph(nclicks, ch_id_text, ch_id_text_2, radio_but_1, radio_but_2):
             return dff1
 
         else:
-            dff1_obj = yd.youtube_creator_dataframe(ch_id_text)
-            dff1_obj.save_data_mangodb()
-            dff1 = dff1_obj.raw_data_clean_data()
+            object_1 = yd.youtube_creator_dataframe(ch_id_text)
+            object_1.save_data_mangodb()
+            dff1 = pd.DataFrame(list(collecting_mangodb(ch_id_text).find()))
+            dff1 = dff1.iloc[:, 2:]
             return dff1
 
     def second_collection_db(ch_id_text_2):
@@ -136,10 +137,12 @@ def update_graph(nclicks, ch_id_text, ch_id_text_2, radio_but_1, radio_but_2):
             return dff2
 
         else:
-            dff2_obj = yd.youtube_creator_dataframe(ch_id_text_2)
-            dff2_obj.save_data_mangodb()
-            dff2 = dff2_obj.raw_data_clean_data()
+            object_2 = yd.youtube_creator_dataframe(ch_id_text_2)
+            object_2.save_data_mangodb()
+            dff2 = pd.DataFrame(list(collecting_mangodb(ch_id_text_2).find()))
+            dff2 = dff2.iloc[:, 2:]
             return dff2
+
 
     def nclicks_fig_v_bar(dff, rad_but):
         dff['viewCount'] = dff['viewCount'].apply(lambda x: 0 if x is None else int(x))
